@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Clientes{% endblock %}
+{% block content %}
+<h1>Clientes</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Telefone</th>
+    </tr>
+    {% for cliente in clientes %}
+    <tr>
+        <td>{{ cliente['id'] }}</td>
+        <td>{{ cliente['nome'] }}</td>
+        <td>{{ cliente['email'] }}</td>
+        <td>{{ cliente['telefone'] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Adicionar Cliente</h2>
+<form action="{{ url_for('add_cliente') }}" method="POST">
+    <input type="text" name="nome" placeholder="Nome" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="telefone" placeholder="Telefone" required>
+    <button type="submit">Adicionar</button>
+</form>
+{% endblock %}

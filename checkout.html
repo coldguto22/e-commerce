@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Finalizar Compra</title>
+</head>
+<body>
+    <h1>Finalizar Compra</h1>
+    <form action="{{ url_for('checkout') }}" method="POST">
+        <label for="cliente_id">Cliente:</label>
+        <select name="cliente_id" required>
+            {% for cliente in clientes %}
+            <option value="{{ cliente['id'] }}">{{ cliente['nome'] }}</option>
+            {% endfor %}
+        </select><br>
+
+        <label for="forma_pagamento_id">Forma de Pagamento:</label>
+        <select name="forma_pagamento_id" required>
+            {% for pagamento in formas_pagamento %}
+            <option value="{{ pagamento['id'] }}">{{ pagamento['tipo'] }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Finalizar Compra</button>
+    </form>
+</body>
+</html>

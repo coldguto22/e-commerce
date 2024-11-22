@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrinho</title>
+</head>
+<body>
+    <h1>Carrinho de Compras</h1>
+    <table border="1">
+        <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço Unitário</th>
+            <th>Total</th>
+            <th>Ações</th>
+        </tr>
+        {% for item in cart %}
+        <tr>
+            <td>{{ item['nome'] }}</td>
+            <td>{{ item['quantidade'] }}</td>
+            <td>R$ {{ "%.2f"|format(item['preco']) }}</td>
+            <td>R$ {{ "%.2f"|format(item['preco'] * item['quantidade']) }}</td>
+            <td><a href="{{ url_for('remove_from_cart', product_id=item['id']) }}">Remover</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <p><strong>Total do Carrinho:</strong> R$ {{ "%.2f"|format(sum(item['preco'] * item['quantidade'] for item in cart)) }}</p>
+    <a href="{{ url_for('checkout') }}">Finalizar Compra</a>
+</body>
+</html>
